@@ -6,26 +6,30 @@ import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.support.BasicAuthorizationInterceptor;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@ActiveProfiles("dev")
 public class PetClinicRestControllerTests {
 
-  private RestTemplate restTemplate;
+  private TestRestTemplate restTemplate;
 
   @Before
   public void setUp() {
-    restTemplate = new RestTemplate();
-    restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor("user2", "secret"));
+    restTemplate = new TestRestTemplate().withBasicAuth("user2", "secret");
   }
 
   @Test
