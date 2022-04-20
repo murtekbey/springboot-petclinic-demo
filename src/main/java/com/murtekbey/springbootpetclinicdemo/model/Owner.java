@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,11 +24,13 @@ public class Owner {
     @Getter
     @Setter
     @Column(name = "first_name")
+    @NotEmpty
     private String firstName;
 
     @Getter
     @Setter
     @Column(name = "last_name")
+    @NotEmpty
     private String lastName;
 
     @Getter
